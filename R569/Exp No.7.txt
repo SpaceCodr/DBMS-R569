@@ -1,0 +1,147 @@
+>Views and Assertions<
+=--------------------=
+
+1.
+CREATE VIEW Yearwise AS SELECT * FROM Section WHERE year=2009;
+
+View created. 
+
+SELECT * FROM Yearwise;
+
+COURSE_ID           SEC_ID SEMEST       YEAR BUILDING        ROOM_NUMBER
+--------------- ---------- ------ ---------- --------------- -----------
+BIO-101                  1 Summer       2009 Painter                 514
+CS-101                   1 Fall         2009 Packard                 101
+CS-190                   1 Spring       2009 Taylor                 3128
+CS-190                   2 Spring       2009 Taylor                 3128
+CS-347                   1 Fall         2009 Taylor                 3128
+EE-181                   1 Spring       2009 Taylor                 3128
+PHY-101                  1 Fall         2009 Watson                  100
+
+7 rows selected.
+
+2.
+CREATE VIEW Studentlist AS SELECT * FROM Student ORDER BY name ASC;
+
+View created.
+
+SELECT * FROM Studentlist;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     76653 Aoi                  Elec. Eng.              58 10-MAY-00
+     98765 Bourikas             Elec. Eng.              98 07-JUN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-99
+     23121 Chavez               Finance                110 25-MAY-93
+     44553 John                 Physics                 56 30-APR-94
+     45678 Mozart               Physics                 56 27-AUG-99
+     55739 Sanchez              Music                   48 07-FEB-95
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     98988 Tanaka               Biology                120 08-APR-02
+     11221 Umer                 Biology                150 24-MAY-96
+     54321 Williams             Comp. Sci.              54 01-OCT-96
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+
+13 rows selected.
+
+3.
+CREATE VIEW Teacher AS SELECT * FROM Instructor WHERE ID NOT IN (SELECT ID FROM Teaches);
+
+View created.
+
+SQL> SELECT * FROM Teacher;
+
+        ID NAME                 DEPT_NAME           SALARY
+---------- -------------------- --------------- ----------
+     33456 Gold                 Physics              95700
+     58583 Califieri            History              71610
+
+4.
+INSERT INTO Studentlist Values (19945,'Shekar','Comp. Sci.',32,to_date('02/01/2001','DD/MM/YYYY'));
+
+1 row created.
+
+SELECT * FROM Studentlist;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     76653 Aoi                  Elec. Eng.              58 10-MAY-00
+     98765 Bourikas             Elec. Eng.              98 07-JUN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-99
+     23121 Chavez               Finance                110 25-MAY-93
+     44553 John                 Physics                 56 30-APR-94
+     45678 Mozart               Physics                 56 27-AUG-99
+     55739 Sanchez              Music                   48 07-FEB-95
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19945 Shekar               Comp. Sci.              32 02-JAN-01
+     98988 Tanaka               Biology                120 08-APR-02
+     11221 Umer                 Biology                150 24-MAY-96
+     54321 Williams             Comp. Sci.              54 01-OCT-96
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+
+14 rows selected.
+
+UPDATE Studentlist SET name='Saviour' WHERE ID=19945;
+
+1 row updated.
+
+SELECT * FROM Studentlist;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     76653 Aoi                  Elec. Eng.              58 10-MAY-00
+     98765 Bourikas             Elec. Eng.              98 07-JUN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-99
+     23121 Chavez               Finance                110 25-MAY-93
+     44553 John                 Physics                 56 30-APR-94
+     45678 Mozart               Physics                 56 27-AUG-99
+     55739 Sanchez              Music                   48 07-FEB-95
+     19945 Saviour              Comp. Sci.              32 02-JAN-01
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     98988 Tanaka               Biology                120 08-APR-02
+     11221 Umer                 Biology                150 24-MAY-96
+     54321 Williams             Comp. Sci.              54 01-OCT-96
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+
+14 rows selected.
+
+5.
+DELETE FROM Studentlist WHERE ID=19945;
+
+1 row deleted.
+
+SELECT * FROM Studentlist;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     76653 Aoi                  Elec. Eng.              58 10-MAY-00
+     98765 Bourikas             Elec. Eng.              98 07-JUN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-99
+     23121 Chavez               Finance                110 25-MAY-93
+     44553 John                 Physics                 56 30-APR-94
+     45678 Mozart               Physics                 56 27-AUG-99
+     55739 Sanchez              Music                   48 07-FEB-95
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     98988 Tanaka               Biology                120 08-APR-02
+     11221 Umer                 Biology                150 24-MAY-96
+     54321 Williams             Comp. Sci.              54 01-OCT-96
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+
+13 rows selected.
+
+6.
+DROP VIEW Studentlist;
+
+View dropped.
+
+DROP VIEW Yearwise;
+
+View dropped.
+
+DROP VIEW Teacher;
+
+View dropped.

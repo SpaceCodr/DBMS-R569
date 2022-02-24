@@ -1,0 +1,15 @@
+>DCL Commands<
+=------------=
+
+1.
+SELECT 'GRANT SELECT ON Teaches TO'||r569@orcl||';' FROM all_users;
+
+2.
+SELECT 'GRANT ALL PRIVILLEGES ON Subject TO'||r569@orcl||';' FROM all_users;
+
+3.
+SELECT * FROM USER_SYS_PRIVS;
+
+SELECT * FROM USER_TAB_PRIVS;
+
+SELECT * FROM USER_ROLE_PRIVS;

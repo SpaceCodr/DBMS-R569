@@ -1,0 +1,37 @@
+>Aggregate Functions<
+=-------------------=
+
+1.
+SELECT SUM(salary),MAX(salary),MIN(salary),AVG(salary) FROM Instructor;
+
+SUM(SALARY) MAX(SALARY) MIN(SALARY) AVG(SALARY)
+----------- ----------- ----------- -----------
+     916245      104500       46200       83295
+
+2.
+SELECT SUM(salary),MAX(salary),MIN(salary),AVG(salary) FROM Instructor WHERE dept_name='History';
+
+SUM(SALARY) MAX(SALARY) MIN(SALARY) AVG(SALARY)
+----------- ----------- ----------- -----------
+     140910       71610       69300       70455
+
+3.
+SELECT COUNT(*) FROM Instructor;
+
+  COUNT(*)
+----------
+        11
+
+4.
+SELECT COUNT(*) FROM Instructor WHERE dept_name='Comp. Sci.';
+
+  COUNT(*)
+----------
+         3
+
+5.
+SELECT COUNT(UNIQUE salary) FROM Instructor;
+
+COUNT(UNIQUESALARY)
+-------------------
+                 11

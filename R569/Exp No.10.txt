@@ -1,0 +1,74 @@
+>HAVING and GROUP BY<
+=-------------------=
+
+1.
+SELECT dept_name,COUNT(ID),AVG(salary) FROM Instructor GROUP BY dept_name;
+
+DEPT_NAME        COUNT(ID) AVG(SALARY)
+--------------- ---------- -----------
+Elec. Eng.               1       88000
+Physics                  2      100100
+Comp. Sci.               3  86258.3333
+Finance                  1       99000
+Biology                  1       83160
+Music                    1       46200
+History                  2       70455
+
+7 rows selected.
+
+2.
+SELECT course_id,semester,COUNT(ID) FROM Subject GROUP BY course_id,semester HAVING COUNT(ID)>0;
+
+COURSE_ID       SEMEST  COUNT(ID)
+--------------- ------ ----------
+FIN-201         Spring          1
+CS-101          Spring          1
+EE-181          Spring          1
+CS-190          Spring          2
+CS-315          Spring          2
+HIS-351         Spring          1
+CS-347          Fall            2
+CS-319          Spring          2
+BIO-301         Summer          1
+PHY-101         Fall            1
+CS-101          Fall            6
+BIO-101         Summer          1
+MU-199          Spring          1
+
+13 rows selected.
+
+3.
+SELECT course_id,semester,COUNT(ID) FROM Subject GROUP BY course_id,semester HAVING COUNT(course_id)>2;
+
+COURSE_ID       SEMEST  COUNT(ID)
+--------------- ------ ----------
+CS-101          Fall            6
+
+4.
+SELECT course_id,i.name,COUNT(sec_id) FROM Teaches,Instructor i WHERE Teaches.ID=i.ID GROUP BY course_id,i.name;
+
+COURSE_ID       NAME                 COUNT(SEC_ID)
+--------------- -------------------- -------------
+CS-315          Srinivasan                       1
+BIO-301         Crick                            1
+CS-101          Katz                             1
+CS-347          Srinivasan                       1
+FIN-201         Wu                               1
+PHY-101         Einstein                         1
+CS-319          Katz                             1
+EE-181          Kim                              1
+BIO-101         Crick                            1
+CS-101          Srinivasan                       1
+MU-199          Mozart                           1
+HIS-351         El Said                          1
+CS-190          Brandt                           2
+CS-319          Brandt                           1
+
+14 rows selected.
+
+5.
+SELECT dept_name,COUNT(ID) FROM Instructor WHERE dept_name IN(SELECT dept_name FROM Instructor GROUP BY dept_name HAVING COUNT(ID)>2) AND salary>80000 GROUP BY dept_name;
+
+DEPT_NAME        COUNT(ID)
+--------------- ----------
+Comp. Sci.               2

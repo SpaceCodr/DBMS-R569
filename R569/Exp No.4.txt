@@ -1,0 +1,143 @@
+>DQL Commands<
+=------------=
+
+1.
+SELECT name,dept_name FROM Instructor;
+
+NAME                 DEPT_NAME
+-------------------- ---------------
+Srinivasan           Comp. Sci.
+Wu                   Finance
+Mozart               Music
+Einstein             Physics
+El Said              History
+Gold                 Physics
+Katz                 Comp. Sci.
+Califieri            History
+Crick                Biology
+Brandt               Comp. Sci.
+Kim                  Elec. Eng.
+
+11 rows selected.
+
+2.
+SELECT UNIQUE semester FROM Teaches;
+
+SEMEST
+------
+Spring
+Summer
+Fall
+
+3.
+SELECT name,salary*1.1 FROM Instructor;
+
+NAME                 SALARY*1.1
+-------------------- ----------
+Srinivasan              82582.5
+Wu                       108900
+Mozart                    50820
+Einstein                 114950
+El Said                   76230
+Gold                     105270
+Katz                      90750
+Califieri                 78771
+Crick                     91476
+Brandt                   111320
+Kim                       96800
+
+11 rows selected.
+
+4.
+SELECT ID,name FROM Instructor WHERE salary>70000 AND dept_name='Comp. Sci.';
+
+        ID NAME
+---------- --------------------
+     10101 Srinivasan
+     45565 Katz
+     83821 Brandt
+
+5.
+SELECT i.name,i.dept_name,d.building FROM Instructor i INNER JOIN Department d ON i.dept_name=d.dept_name;
+
+NAME                 DEPT_NAME       BUILDING
+-------------------- --------------- ---------------
+Srinivasan           Comp. Sci.      Taylor
+Wu                   Finance         Painter
+Mozart               Music           Packard
+Einstein             Physics         Watson
+El Said              History         Taylor
+Gold                 Physics         Watson
+Katz                 Comp. Sci.      Taylor
+Califieri            History         Taylor
+Crick                Biology         Watson
+Brandt               Comp. Sci.      Taylor
+Kim                  Elec. Eng.      Taylor
+
+11 rows selected.
+
+6.
+SELECT i.name,c.course_id FROM Instructor i JOIN Teaches c ON i.ID=c.ID;
+
+NAME                 COURSE_ID
+-------------------- ---------------
+Srinivasan           CS-101
+Srinivasan           CS-315
+Srinivasan           CS-347
+Wu                   FIN-201
+Mozart               MU-199
+Einstein             PHY-101
+El Said              HIS-351
+Katz                 CS-101
+Katz                 CS-319
+Crick                BIO-101
+Crick                BIO-301
+Brandt               CS-190
+Brandt               CS-190
+Brandt               CS-319
+Kim                  EE-181
+
+15 rows selected.
+
+7.
+SELECT * FROM Course WHERE title LIKE 'Intro%';
+
+COURSE_ID       TITLE                          DEPT_NAME          CREDITS
+--------------- ------------------------------ --------------- ----------
+BIO-101         Intro. to Biology              Biology                  4
+CS-101          Intro. to Computer Science     Comp. Sci.               4
+EE-181          Intro. to Digital Systems      Elec. Eng.               3
+
+8.
+SELECT * FROM Course WHERE title LIKE '%Comp%';
+
+COURSE_ID       TITLE                          DEPT_NAME          CREDITS
+--------------- ------------------------------ --------------- ----------
+CS-101          Intro. to Computer Science     Comp. Sci.               4
+
+9.
+SELECT * FROM Student WHERE name LIKE '___';
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+
+10.
+SELECT * FROM Student WHERE name LIKE '___%';
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 Peltier              Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+12 rows selected.

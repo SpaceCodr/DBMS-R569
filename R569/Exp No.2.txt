@@ -1,0 +1,370 @@
+>DDL Commands<
+=------------=
+
+1.
+CREATE TABLE Classroom(building varchar(15),room_number int,capacity int,PRIMARY KEY (room_number));
+
+Table created.
+
+ DESC Classroom;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                               NOT NULL NUMBER(38)
+ CAPACITY                                           NUMBER(38)
+
+CREATE TABLE Department(dept_name varchar(15),building varchar(15),budget float,PRIMARY KEY (dept_name));
+
+Table created.
+
+ DESC Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME                                 NOT NULL VARCHAR2(15)
+ BUILDING                                           VARCHAR2(15)
+ BUDGET                                             FLOAT(126)
+
+CREATE TABLE Course(course_id varchar(15),title varchar(30),dept_name varchar(15),credits int,PRIMARY KEY (course_id),FOREIGN KEY (dept_name
+  2  ) REFERENCES Department (dept_name));
+
+Table created.
+
+ DESC Course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ TITLE                                              VARCHAR2(30)
+ DEPT_NAME                                          VARCHAR2(15)
+ CREDITS                                            NUMBER(38)
+
+CREATE TABLE Instructor(ID int,name varchar(20),dept_name varchar(15),salary int,PRIMARY KEY (ID),FOREIGN KEY (dept_name) REFERENCES Department (dept_name));
+
+Table created.
+
+ DESC Instructor
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ SALARY                                             NUMBER(38)
+
+CREATE TABLE Student(ID int,name varchar(20),dept_name varchar(15),tot_cred int,PRIMARY KEY (ID),FOREIGN KEY(dept_name) REFERENCES Department (dept_name));
+
+Table created.
+
+ DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+CREATE TABLE Section(course_id varchar(15),sec_id int,semester varchar(6),year int,building varchar(15),room_number int,PRIMARY KEY (course_id,sec_id,semester,year),FOREIGN KEY (course_id) REFERENCES Course (course_id),FOREIGN KEY (room_number) REFERENCES Classroom (room_number));
+
+Table created.
+
+ DESC Section;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ SEC_ID                                    NOT NULL NUMBER(38)
+ SEMESTER                                  NOT NULL VARCHAR2(6)
+ YEAR                                      NOT NULL NUMBER(38)
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                                        NUMBER(38)
+
+CREATE TABLE Teaches(ID int,course_id varchar(15),sec_id int,semester varchar(6),year int,PRIMARY KEY (ID,course_id,sec_id,semester,year),FOREIGN KEY (course_id) REFERENCES Course (course_id));
+
+Table created.
+
+ DESC Teaches;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ SEC_ID                                    NOT NULL NUMBER(38)
+ SEMESTER                                  NOT NULL VARCHAR2(6)
+ YEAR                                      NOT NULL NUMBER(38)
+
+CREATE TABLE Takes(ID int,course_id varchar(15),sec_id int,semester varchar(6),year int,grade varchar(2),PRIMARY KEY (ID,course_id,sec_id,semester,year),FOREIGN KEY (course_id) REFERENCES Course (course_id));
+
+Table created.
+
+ DESC Takes;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ SEC_ID                                    NOT NULL NUMBER(38)
+ SEMESTER                                  NOT NULL VARCHAR2(6)
+ YEAR                                      NOT NULL NUMBER(38)
+ GRADE                                              VARCHAR2(2)
+
+2.
+a. 
+DESC Course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ TITLE                                              VARCHAR2(30)
+ DEPT_NAME                                          VARCHAR2(15)
+ CREDITS                                            NUMBER(38) 
+
+ALTER TABLE Course MODIFY course_id varchar(10);
+
+Table altered.
+
+DESC Course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(10)
+ TITLE                                              VARCHAR2(30)
+ DEPT_NAME                                          VARCHAR2(15)
+ CREDITS                                            NUMBER(38)
+
+b.
+ DESC Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME                                 NOT NULL VARCHAR2(15)
+ BUILDING                                           VARCHAR2(15)
+ BUDGET                                             FLOAT(126)
+
+ALTER TABLE Department ADD dept_no int;
+
+Table altered.
+
+DESC Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME                                 NOT NULL VARCHAR2(15)
+ BUILDING                                           VARCHAR2(15)
+ BUDGET                                             FLOAT(126)
+ DEPT_NO                                            NUMBER(38)
+
+c.
+ DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL CHAR(5)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+ALTER TABLE Student MODIFY name varchar(20) NOT NULL;
+
+Table altered.
+
+DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL CHAR(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+d.
+ DESC Classroom;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                               NOT NULL NUMBER(38)
+ CAPACITY                                           NUMBER(38)
+
+ALTER TABLE Classroom MODIFY capacity int DEFAULT 50;
+
+Table altered.
+
+DESC Classroom;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                               NOT NULL NUMBER(38)
+ CAPACITY                                           NUMBER(38)
+
+e.
+Content of column dept_name in Department already unique as it is primary key.
+
+f.
+ DESC Instructor
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ SALARY                                             NUMBER(38)
+
+ALTER TABLE Instructor ADD CONSTRAINT csal CHECK(salary>50000);
+
+Table altered.
+
+DESC Instructor
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ SALARY                                             NUMBER(38)
+
+g.
+DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+ALTER TABLE Student ADD dob date;
+
+Table altered.
+
+DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+ DOB                                                DATE
+3.
+a.
+ DESC Course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(10)
+ TITLE                                              VARCHAR2(30)
+ DEPT_NAME                                          VARCHAR2(15)
+ CREDITS                                            NUMBER(38)
+
+ALTER TABLE Course MODIFY course_id varchar(15);
+
+Table altered.
+
+DESC Course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ TITLE                                              VARCHAR2(30)
+ DEPT_NAME                                          VARCHAR2(15)
+ CREDITS                                            NUMBER(38)
+
+b.
+ DESC Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME                                 NOT NULL VARCHAR2(15)
+ BUILDING                                           VARCHAR2(15)
+ BUDGET                                             FLOAT(126)
+ DEPT_NO                                            NUMBER(38)
+
+ALTER TABLE Department DROP COLUMN dept_no;
+
+Table altered.
+
+DESC Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NAME                                 NOT NULL VARCHAR2(15)
+ BUILDING                                           VARCHAR2(15)
+ BUDGET                                             FLOAT(126)
+
+c.
+ DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL CHAR(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+ALTER TABLE Student MODIFY name varchar(20) NULL;
+
+Table altered.
+
+DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL CHAR(5)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ TOT_CRED                                           NUMBER(38)
+
+d.
+ DESC Classroom;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                               NOT NULL NUMBER(38)
+ CAPACITY                                           NUMBER(38)
+
+ALTER TABLE Classroom MODIFY capacity DEFAULT NULL;
+
+Table altered.
+
+DESC Classroom;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUILDING                                           VARCHAR2(15)
+ ROOM_NUMBER                               NOT NULL NUMBER(38)
+ CAPACITY                                           NUMBER(38)
+
+e.
+No modifications were done to be removed.
+
+f.
+DESC Instructor
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ SALARY                                             NUMBER(38)
+
+ALTER TABLE Instructor DROP CONSTRAINT csal;
+
+Table altered.
+
+DESC Instructor
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DEPT_NAME                                          VARCHAR2(15)
+ SALARY                                             NUMBER(38)
+
+4.
+ DESC Takes;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ SEC_ID                                    NOT NULL NUMBER(38)
+ SEMESTER                                  NOT NULL VARCHAR2(6)
+ YEAR                                      NOT NULL NUMBER(38)
+ GRADE                                              VARCHAR2(2)
+
+DESC Subject;
+ERROR:
+ORA-04043: object Subject does not exist
+
+ RENAME Takes to Subject;
+
+Table renamed.
+
+DESC Takes;
+ERROR:
+ORA-04043: object Takes does not exist
+
+
+DESC Subject;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ COURSE_ID                                 NOT NULL VARCHAR2(15)
+ SEC_ID                                    NOT NULL NUMBER(38)
+ SEMESTER                                  NOT NULL VARCHAR2(6)
+ YEAR                                      NOT NULL NUMBER(38)
+ GRADE                                              VARCHAR2(2)

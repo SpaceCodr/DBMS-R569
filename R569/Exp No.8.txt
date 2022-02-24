@@ -1,0 +1,109 @@
+>Bulit-In-Functions<
+=------------------=
+
+1.
+(a).
+SELECT ROUND(COS(ABS(-10))*EXP(2)) FROM Student WHERE ID=12345;
+
+ROUND(COS(ABS(-10))*EXP(2))
+---------------------------
+                         -6
+
+(b).
+SELECT TRUNC(LOG(10,SQRT(MOD(POWER(5,4),14))),2) FROM Student WHERE ID=12345;
+
+TRUNC(LOG(10,SQRT(MOD(POWER(5,4),14))),2)
+-----------------------------------------
+                                      .47
+
+(c).
+SELECT SIN(30)+TAN(60) FROM Student WHERE ID=12345;
+
+SIN(30)+TAN(60)
+---------------
+     -.66799123
+
+2.
+SELECT FLOOR(12.9),CEIL(12.9) FROM Student WHERE ID=12345;
+
+FLOOR(12.9) CEIL(12.9)
+----------- ----------
+         12         13
+
+3.
+SELECT UPPER(name),LOWER(name),INITCAP(name) FROM Instructor;
+
+UPPER(NAME)          LOWER(NAME)          INITCAP(NAME)
+-------------------- -------------------- --------------------
+SRINIVASAN           srinivasan           Srinivasan
+WU                   wu                   Wu
+MOZART               mozart               Mozart
+EINSTEIN             einstein             Einstein
+EL SAID              el said              El Said
+GOLD                 gold                 Gold
+KATZ                 katz                 Katz
+CALIFIERI            califieri            Califieri
+CRICK                crick                Crick
+BRANDT               brandt               Brandt
+KIM                  kim                  Kim
+
+11 rows selected.
+
+4.
+SELECT REPLACE(c.course_id,'-','/') FROM Course c;
+
+REPLACE(C.COURS
+---------------
+BIO/101
+BIO/301
+CS/101
+CS/190
+CS/315
+CS/319
+CS/347
+EE/181
+FIN/201
+HIS/351
+MU/199
+PHY/101
+
+12 rows selected.
+
+5.
+SELECT CONCAT(CONCAT(name,' '),dept_name) AS Full_name FROM Instructor;
+
+FULL_NAME
+------------------------------------
+Srinivasan Comp. Sci.
+Wu Finance
+Mozart Music
+Einstein Physics
+El Said History
+Gold Physics
+Katz Comp. Sci.
+Califieri History
+Crick Biology
+Brandt Comp. Sci.
+Kim Elec. Eng.
+
+11 rows selected.
+
+6.
+SELECT SUBSTR(course_id,-3) FROM Course;
+
+SUB
+---
+101
+301
+101
+190
+315
+319
+347
+181
+201
+351
+199
+101
+
+12 rows selected.

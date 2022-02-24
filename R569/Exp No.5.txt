@@ -1,0 +1,280 @@
+>TCL Commands<
+=------------=
+
+1.
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 Peltier              Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+12 rows selected.
+
+UPDATE Student SET name='John' WHERE ID=44553;
+
+1 row updated.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+12 rows selected.
+
+2.
+COMMIT;
+
+Commit complete.
+
+3.
+UPDATE Student SET name='Peltier' WHERE ID=44553;
+
+1 row updated.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 Peltier              Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+12 rows selected.
+
+4.
+ROLLBACK;
+
+Rollback complete.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+12 rows selected.
+
+5.
+INSERT INTO Student VALUES(11221,'Jinu','Biology',150,to_date('24/05/2006','DD/MM/YYYY'));
+
+1 row created.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Jinu                 Biology                150 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+UPDATE Student SET name='Umer' WHERE ID=11221;
+
+1 row updated.
+
+SAVEPOINT name_jtn;
+
+Savepoint created.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Biology                150 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+UPDATE Student SET tot_cred=160 WHERE ID =11221;
+
+1 row updated.
+
+SAVEPOINT cred_in;
+
+Savepoint created.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Biology                160 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+UPDATE Student SET dept_name='Comp. Sci.' WHERE ID=11221;
+
+1 row updated.
+
+SAVEPOINT dept_btc;
+
+Savepoint created.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Comp. Sci.             160 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10 
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+6.
+ROLLBACK TO dept_btc;
+
+Rollback complete.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Comp. Sci.             160 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+ROLLBACK TO cred_in;
+
+Rollback complete.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Biology                160 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
+
+ROLLBACK TO name_jtn;
+
+Rollback complete.
+
+SELECT * FROM Student;
+
+        ID NAME                 DEPT_NAME         TOT_CRED DOB
+---------- -------------------- --------------- ---------- ---------
+     11221 Umer                 Biology                150 24-MAY-06
+       128 Zhang                Comp. Sci.             102 24-JUL-00
+     12345 Shankar              Comp. Sci.              42 01-JAN-01
+     19991 Brandt               History                 80 10-JUN-02
+     76543 Brown                Comp. Sci.              58 09-MAR-09
+     23121 Chavez               Finance                110 25-MAY-03
+     44553 John                 Physics                 56 30-APR-04
+     45678 Mozart               Physics                 56 27-AUG-99
+     54321 Williams             Comp. Sci.              54 01-OCT-06
+     55739 Sanchez              Music                   48 07-FEB-95
+     76653 Aoi                  Elec. Eng.              58 10-MAY-10
+     98765 Bourikas             Elec. Eng.              98 07-JUN-11
+     98988 Tanaka               Biology                120 08-APR-12
+
+13 rows selected.
